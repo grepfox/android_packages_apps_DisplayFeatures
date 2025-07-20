@@ -230,6 +230,12 @@ public class DisplayFeaturesFragment extends PreferenceFragmentCompat implements
 
             Boolean enabled = (!value.equals("0"));
 
+            Intent cabcIntent = new Intent(mContext,
+                    com.android.displayfeatures.display.DisplayFeaturesCabcService.class);
+
+            if (enabled) mContext.startService(cabcIntent);
+            else mContext.stopService(cabcIntent);
+
             Intent intent = new Intent(mConfig.ACTION_CABC_SERVICE_CHANGED);
 
             intent.putExtra(mConfig.EXTRA_CABC_STATE, enabled);

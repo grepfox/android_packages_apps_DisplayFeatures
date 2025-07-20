@@ -121,6 +121,12 @@ public class DisplayFeaturesCabcTileService extends TileService {
         FileUtils.writeLine(mConfig.getCabcPath(), CabcValues[currentCabcMode]);
         Boolean enabled = (!value.equals("0"));
 
+        Intent cabcIntent = new Intent(this,
+                com.android.displayfeatures.display.DisplayFeaturesCabcService.class);
+
+        if (enabled) this.startService(cabcIntent);
+        else this.stopService(cabcIntent);
+
         Intent intent = new Intent(mConfig.ACTION_CABC_SERVICE_CHANGED);
 
         intent.putExtra(mConfig.EXTRA_CABC_STATE, enabled);
